@@ -3,6 +3,8 @@
 
 as a task in BSUIR, 2020
 
+[Trello board](https://trello.com/invite/b/P16JOhs1/8fb45c11457531975c3c38898d21bbb5/main)
+
 ## Hardware
 
 - WEMOS TTGO Mini D1 ESP32 on ESP32-S (ESP-WROOM-32) chip
