@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <esp_err.h>
 #include <esp_wifi_types.h>
-#include <string.h>
 
 // Неймспейсы и имена данных для NVS
 #define NVS_WIFI_NS "wifi"

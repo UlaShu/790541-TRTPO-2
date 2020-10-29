@@ -1,5 +1,6 @@
 #include <nvs.h>
 #include <esp_system.h>
+#include <string.h>
 
 #include "cfg.h"
 
