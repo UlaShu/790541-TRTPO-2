@@ -17,13 +17,13 @@
 typedef struct {
 	uint8_t ssid[16];      // SSID of target AP
 	uint8_t password[16];  // password of target AP
-} wifi_sta_config_int_t;
+} wifi_creds_config_int_t;
 
 // Общий конфиг вайфая
 typedef struct {
-	wifi_sta_config_int_t	ap;  // configuration of AP
-	wifi_mode_t 			mode;
-	wifi_sta_config_int_t	sta; // configuration of STA
+	wifi_creds_config_int_t	ap;  // configuration of AP
+	wifi_creds_config_int_t	sta; // configuration of STA
+	wifi_mode_t 		mode;
 } wifi_config_int_t;
 
 // Конфигурация смазчика

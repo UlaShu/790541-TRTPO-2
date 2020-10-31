@@ -133,7 +133,7 @@ esp_err_t config_save() {
 	config_wifi_read(&currentConfig);
 
 	if ( memcmp((void*)&(wCfg->ap), (void*)&(currentConfig.ap), sizeof(currentConfig.ap)) != 0 ) {
-		err = nvs_set_blob(wifiStorage, NVS_WIFI_AP_CFG, (void*)&(wCfg->ap), sizeof(wifi_sta_config_int_t));
+		err = nvs_set_blob(wifiStorage, NVS_WIFI_AP_CFG, (void*)&(wCfg->ap), sizeof(wifi_creds_config_int_t));
 	}
 
 	if (wCfg->mode != currentConfig.mode) {
@@ -141,7 +141,7 @@ esp_err_t config_save() {
 	}
 
 	if ( memcmp((void*)&(wCfg->sta), (void*)&(currentConfig.sta), sizeof(currentConfig.sta)) != 0 ) {
-		err = nvs_set_blob(wifiStorage, NVS_WIFI_STA_CFG, (void*)&(wCfg->sta), sizeof(wifi_sta_config_int_t));
+		err = nvs_set_blob(wifiStorage, NVS_WIFI_STA_CFG, (void*)&(wCfg->sta), sizeof(wifi_creds_config_int_t));
 	}
 
 	oiler_config_t oilCurrentConfig;
