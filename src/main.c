@@ -9,6 +9,7 @@
 
 #include "defines.h"
 #include "cfg.h"
+#include "gps.h"
 
 
 static esp_err_t event_handler(void *ctx, system_event_t *event) {
@@ -105,4 +106,5 @@ void app_main() {
 	wifi_init();
 
 	// ToDo: xTaskCreate(<UART read loop>, "gps_read", 4*1024, (void*)(exchangeData), 5, NULL);
+	xTaskCreate(nmea_read_task, "gps_read", 4*1024, (void*)(exchangeData), 5, NULL);
 }
