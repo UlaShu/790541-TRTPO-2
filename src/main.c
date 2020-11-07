@@ -9,8 +9,6 @@
 
 #include "defines.h"
 #include "cfg.h"
-#include "gps.h"
-
 
 static esp_err_t event_handler(void *ctx, system_event_t *event) {
 	static uint8_t apStationsCount=0;
