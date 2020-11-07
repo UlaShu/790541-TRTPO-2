@@ -105,5 +105,4 @@ void app_main() {
 
 	wifi_init();
 
-	 // ToDo: xTaskCreate(<UART read loop>, "gps_read", 4*1024, (void*)(exchangeData), 5, NULL);
 }
