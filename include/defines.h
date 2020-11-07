@@ -11,6 +11,7 @@
 #include "driver/gpio.h"
 #define UART_TX GPIO_NUM_17
 #define UART_RX GPIO_NUM_16
+#define UART_NUM UART_NUM_1
 
 #define _sysName "oiler v2 rtos esp32"
 

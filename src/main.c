@@ -7,6 +7,8 @@
 #include <driver/uart.h>
 #include <driver/gpio.h>
 
+#include "nmea.h"
+
 #include "defines.h"
 #include "cfg.h"
 
@@ -90,13 +92,15 @@ static void uart_init() {
 		.flow_ctrl = UART_HW_FLOWCTRL_DISABLE
 	};
 
-	uart_param_config(UART_NUM_1, &uart_config);
-	uart_driver_install(UART_NUM_1, 129, 0, 10, &(gExchangeData->uartQueue), 0);
-	uart_set_pin(UART_NUM_1, UART_TX, UART_RX, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
+	uart_param_config(UART_NUM, &uart_config);
+	uart_driver_install(UART_NUM, 129, 0, 10, &(gExchangeData->uartQueue), 0);
+	uart_set_pin(UART_NUM, UART_TX, UART_RX, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
 }
 
 
 void app_main() {
+	exchange_t* exchangeData = initExchange();
+
 	uart_init();
 
 	ESP_ERROR_CHECK( nvs_flash_init() );
@@ -104,5 +108,8 @@ void app_main() {
 
 	wifi_init();
 
-	// ToDo: xTaskCreate(<UART read loop>, "gps_read", 4*1024, (void*)(exchangeData), 5, NULL);
+	// Чтение сообщений из UART
+	// 4кб стека для printf/scanf, приоритет 5
+	xTaskCreate(nmea_read_task, "gps_read", 4*1024, (void*)(exchangeData), 5, NULL);
+
 }
