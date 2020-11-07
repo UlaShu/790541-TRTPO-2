@@ -5,7 +5,8 @@
 #include <math.h>
 
 #include "gps.h"
-#include "log.h"
+
+#define TAG_GPS "GPS"
 
 uint8_t gps_get_type(char *buf) {
   if (strncmp(&buf[3], "GGA",3) == 0) {
@@ -171,7 +172,7 @@ gps_rmc *gps_parse_rmc(char *src) {
 gps *gps_parse_message(char *gps_buf) {
     static gps point;
 
-    ESP_LOGV(log_name(TAG_GPS), "%s", gps_buf);
+    ESP_LOGV(TAG_GPS, "%s", gps_buf);
     
     uint8_t type = gps_get_type(gps_buf);
     gps_rmc *rmc;
@@ -188,7 +189,7 @@ gps *gps_parse_message(char *gps_buf) {
       point.msgs[type] = true;
     break;
     case GPS_RMC:
-      ESP_LOGD(log_name(TAG_GPS), "%s", gps_buf);
+      ESP_LOGD(TAG_GPS, "%s", gps_buf);
 
       rmc = gps_parse_rmc(gps_buf);
       point.msgs[GPS_RMC] = false;
@@ -205,7 +206,7 @@ gps *gps_parse_message(char *gps_buf) {
       }
     break;
     case GPS_GSA:
-      ESP_LOGD(log_name(TAG_GPS), "%s", gps_buf);
+      ESP_LOGD(TAG_GPS, "%s", gps_buf);
 
       gsa = gps_parse_gsa(gps_buf);
       point.gsa.hdop = (*gsa).hdop;
@@ -218,7 +219,7 @@ gps *gps_parse_message(char *gps_buf) {
       memcpy(point.gsa.sats, &((*gsa).sats), sizeof(point.gsa.sats));
     break;
     case GPS_GGA:
-      ESP_LOGD(log_name(TAG_GPS), "%s", gps_buf);
+      ESP_LOGD(TAG_GPS, "%s", gps_buf);
       
       gga = gps_parse_gga(gps_buf);
       point.msgs[GPS_GGA] = ((*gga).des == 0 ? false : true);
